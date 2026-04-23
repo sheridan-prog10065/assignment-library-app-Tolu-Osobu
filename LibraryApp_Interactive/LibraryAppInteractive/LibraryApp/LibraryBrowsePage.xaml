@@ -3,8 +3,56 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="LibraryAppInteractive.LibraryBrowsePage"
              Title="Browse Interactive Library">
-			 
-	<Label Text="Browse Library page for the Interactive Library App"
-	       HorizontalOptions="Center"
-	       VerticalOptions="Center"/> 
+    <ScrollView>
+       
+        
+        <VerticalStackLayout Spacing="15" Padding="20">
+            <Label Text="Browse Library page for the Interactive Library App"
+                   HorizontalOptions="Center"
+                   VerticalOptions="Center"/>
+
+            <!-- Book Search Section -->
+            <Label Text="Search for a Book" FontSize="18" FontAttributes="Bold" />
+            <Entry x:Name="_entSearchName" Placeholder="Enter book name..." />
+            <Button Text="Search" Clicked="OnSearchBook" />
+
+            <!-- Book Information Display -->
+            
+             <VerticalStackLayout Spacing="5">
+                    <Label x:Name="_lblBookTitle" Text="Title: " FontAttributes="Bold" />
+                    <Label x:Name="_lblBookISBN" Text="ISBN: " />
+                    <Label x:Name="_lblBookAuthors" Text="Authors: " />
+                </VerticalStackLayout>
+            
+
+            <!-- Library Assets List (Copies) -->
+            <Label Text="Available Copies" FontSize="16" FontAttributes="Bold" />
+            <CollectionView x:Name="_lstAssets" HeightRequest="200">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate >
+                        <VerticalStackLayout Padding="10">
+                            <Label Text="{Binding LibID, StringFormat='ID: {0}'}" 
+                             />
+                            <Label Text="{Binding Status, StringFormat='Status: {0}'}" 
+                            />
+                        </VerticalStackLayout>
+                        
+
+                    </DataTemplate>
+
+                    
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <!-- Loan Operations -->
+            <HorizontalStackLayout Spacing="10" HorizontalOptions="Center">
+                <Button Text="Borrow Selected" Clicked="OnBorrowBook" />
+                <Entry x:Name="_entReturnID" Placeholder="Asset ID for return" WidthRequest="150" />
+                <Button Text="Return Book" Clicked="OnReturnBook" />
+            </HorizontalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+
+    
 </ContentPage>

@@ -9,4 +9,28 @@ namespace LibraryAppInteractive;
 /// </summary>
 public class Library
 {
+    private List<Book> _bookList = new List<Book>();
+    private int _libIDGeneratorSeed = 100;
+    private const int DEFAULT_LIBID_START = 100;
+
+    public Book RegisterBook(string name, string isbn, string[] authors, BookType type, int nCopies)
+    {
+        Book newBook = type switch
+        {
+            BookType.Paper => new Paperbook(name, isbn),
+            BookType.Digital => new DigitalBook(name, isbn),
+            _ => throw new Exception("Invalid Book Type")
+        };
+
+        // Logic to add authors and create initial assets 
+        for (int i = 0; i < nCopies; i++)
+        {
+            newBook.Assets.ToList().Add(new LibraryAsset(_libIDGeneratorSeed++, newBook));
+        }
+
+        _bookList.Add(newBook);
+        return newBook;
+    }
+
+    public Book FindBookByName(string name) => _bookList.FirstOrDefault(b => b.Name.Contains(name));
 }
