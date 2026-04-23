@@ -17,7 +17,7 @@ public class Library
     {
         Book newBook = type switch
         {
-            BookType.Paper => new PaperBook(name, isbn),
+            BookType.Paper => new Paperbook(name, isbn),
             BookType.Digital => new DigitalBook(name, isbn),
             _ => throw new Exception("Invalid Book Type")
         };

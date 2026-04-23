@@ -60,7 +60,7 @@ public partial class LibraryBrowsePage : ContentPage
 
             if (asset != null)
             {
-                object DueDate = await DisplayAlertAsync(
+                 await DisplayAlertAsync(
                     "Loan Confirmed",
                     $"Book borrowed successfully. Due date: {asset.Loan.DueDate:d}. Please use ID {asset.LibID} for return.",
                     "OK");
